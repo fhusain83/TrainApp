@@ -1,0 +1,120 @@
+<!--Doctype HTML>
+<lang "en-US"
+
+<Head>
+        <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+</Head>
+
+<Body>
+!-->
+
+    $(document).ready(function()
+    {
+      alert("hi");
+function Choochoo(TrainName,Destination,FirstArrival,Frequency){
+this.TrainName=TrainName,
+this.Destination=Destination,
+this.FirstArrival=FirstArrival,
+this.Frequency=Frequency
+};
+
+var config = {
+  apiKey: "AIzaSyDi0dZ12zCslLwaY0kO30ScRMxJYWJdRbM",
+    authDomain: "train-e7479.firebaseapp.com",
+    databaseURL: "https://train-e7479.firebaseio.com",
+    projectId: "train-e7479",
+    storageBucket: "train-e7479.appspot.com",
+    messagingSenderId: "522441704687"
+  };
+  firebase.initializeApp(config);
+
+initialize();
+function initialize()
+{
+var db= firebase.database();
+GetTrainSchedual(db);
+//CreateTrainSchedule(db);
+}
+
+
+function GetTrainSchedual(database)
+{
+	alert("here");
+	var addstr="Trains/";
+var ref=database.ref(addstr);
+ref.on("value",gotData,errData);
+}
+
+
+function gotData(data){
+
+	var trains=data.val();
+	var keys=Object.keys(trains);
+   for(var e=0;e<keys.length;e++)
+   {
+   	var key=keys[e];
+   	var mNow=moment();
+   	var mEnd=moment(trains[key].FirstArrival,"HH:mm");
+    var NextTrain="";
+    var trainTime=(
+      (mNow.hour()-mEnd.hour()
+        )*60+mEnd.minutes()+mNot.minutes())/trains[key].Frequency;
+    var nooftimes=((mNow.hour()-mEnd.hour())*60+mEnd.minutes()+mNot.minutes())%trains[key].Frequency;
+    if(nooftimes==0)
+    NextTrain=mNow.hour()*60+mNow.minutes()+trains[key].Frequency;
+    if(nooftimes>0)
+    	{
+    		var str=trainTime.toString().split('.')[0];
+    		NextTrain=trains[key].FirstArrival+trains[key].Frequency*parseInt(str)+1;
+    	    NextTrain=moment(NextTrain,"HH:mm");
+        }
+
+   	var train=trains[key];
+   	var markup="<tr>"+"<td>"+trains[key].name+"</td>"+"<td>"+trains[key].Destination+"</td>"
+    "<td>"+
+    trains[key].Frequency+"</td>"+"<td>"+NextTrain+"</td>"+"</tr>";
+   	alert(markup);
+    $(markup).appendTo($("#traintimetable"));
+     }
+
+};
+function errData(){};
+
+
+function CreateTrainSchedule(database)
+{
+var trains=[];
+var trainOne=new Choochoo("TrainOne","StoneBriar","06:00","25");
+trains.push(trainOne);
+var trainTwo=new Choochoo("trainTwo","Zoo","06:00","25");
+trains.push(trainTwo);
+var trainThree=new Choochoo("TrainThree","SMU","06:00","25");
+trains.push(trainThree);
+var trainFour=new Choochoo("TrainFour","Uptown","06:00","25");
+trains.push(trainFour);
+var trainFive=new Choochoo("TrainFive","Collin Creek","06:00","25");
+trains.push(trainFive);
+var trainSix=new Choochoo("TrainSix","Courtesy Nissan","06:00","25");
+trains.push(trainSix);
+
+var addstr="Trains/";
+var ques=database.ref(addstr);
+
+for(var t=0;t<trains.length;t++)
+	{
+		var obj={
+		name:trains[t].TrainName,
+        Destination:trains[t].Destination,
+        FirstArrival:trains[t].FirstArrival,
+        Frequency:trains[t].Frequency
+	           };
+		ques.push(obj);
+	}
+
+}
+});
+
+
+

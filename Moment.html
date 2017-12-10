@@ -1,0 +1,130 @@
+
+<!Doctype HTML>
+<lang="en-US">
+
+<HTML>
+<Head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="choochoo.js"></script>
+</Head>
+
+
+<Body>
+
+
+
+
+<div class="container">
+   <div class="jumbotron" style="background:#5c3317;">
+   <h1 style="text-align:center; color:white;">Anytime is Train Time</h1>
+   <p style="text-align:center; color:white;">Choo Choo. Chee Chee.
+</div>
+
+
+
+
+<div class="panel panel-primary">
+
+<div class="panel-heading">
+<h3 class="panel-title">Current Train Schedule</h3>
+</div>
+
+
+
+<div class="table-responsive" >
+
+<table class="table-bordered" id="traintimetable">
+<thead>
+
+<tr>
+
+<th style="width:300px; " >
+Train Name
+</th>
+<th style="width:300px;">
+Destination
+</th>
+<th style="width:300px; " >
+Frequency (min)
+</th>
+<th style="width:300px;">
+Next Arrival
+</th>
+
+
+
+</tr>
+</thead>
+
+
+<tbody >
+
+</tbody>
+
+
+</table>
+
+</div>
+</div>
+
+
+
+
+<div class="panel panel-primary">
+
+<div class="panel-heading">
+<h3 class="panel-title">Add Train</h3>
+</div>
+
+
+<div class = "panel-body">
+<div class=container>
+<div class=col-lg-12>
+<label>Train Name</label>
+</div>
+     <div class=col-lg-12>
+     <input type="text" id="TrainName" style="width:90%;"/>
+     </div>
+     <div class=col-lg-12>
+     <label>Destination</label>
+     </div>
+       <div class=col-lg-12>
+     <input id="Destination" type="text" style="width:90%;" />
+     </div>
+     <div class=col-lg-12>
+     <label>First Train Time(HH:mm - military time)
+     </label>
+     </div> 
+       <div class=col-lg-12>
+     <input id="FirstTrain" type="text" style="width:90%;"/>
+     </div>
+       <div class=col-lg-12>
+     <label>Frequency(Min)</label>
+     </div>
+       <div class=col-lg-12>
+     <input id="Frequency" type="text" style="width:90%;"/>
+     </div>
+        <div class=col-lg-12>
+     <input type="submit" id="AddTrain" class="btn btn-default" style="width:9=100px;"/>
+     </div>
+   </div>
+</div>
+</div>
+
+
+
+</div>
+
+
+
+
+</Body>
+<script type="text/javscript" src="Seed.js"></script>
+
+
+</HTML>
